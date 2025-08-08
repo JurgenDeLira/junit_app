@@ -7,6 +7,7 @@ import java.math.BigDecimal;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+//@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 class CuentaTest {
 
     Cuenta cuenta;
@@ -20,6 +21,16 @@ class CuentaTest {
     @AfterEach
     void tearDown() {
         System.out.println("Finalizando el método de prueba.");
+    }
+
+    @BeforeAll
+    static void beforeAll() {
+        System.out.println("Incializando el test.");
+    }
+
+    @AfterAll
+    static void afterAll() {
+        System.out.println("Finalizando el test.");
     }
 
     @Test
@@ -37,7 +48,6 @@ class CuentaTest {
     @Test
     @DisplayName("Probando el saldo de la cuenta corriente, que no sea null, mayor que cero, valor esperado.")
     void testSaldoCuenta() {
-        cuenta = new Cuenta("Jorge", new BigDecimal("1000.12345"));
         assertNotNull(cuenta.getSaldo());
         assertEquals(1000.12345, cuenta.getSaldo().doubleValue());
         assertFalse(cuenta.getSaldo().compareTo(BigDecimal.ZERO) < 0);
